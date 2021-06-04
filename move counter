@@ -37,7 +37,7 @@ def main():
         draw_window() #fajna funkcyjka z wyżej
     pygame.quit()
 
-main()
+funkcja_main = main()
 
 #przeklejone z głównego kodu, bo oddzielnie nie ma sensu
 
