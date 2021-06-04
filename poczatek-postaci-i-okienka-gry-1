@@ -58,24 +58,24 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        if event.type == pygame.KEYDOWN:
+        elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 protagX_change = -10
                 if collision:
                     protagX_change = 0
-            if event.key == pygame.K_RIGHT:
+            elif event.key == pygame.K_RIGHT:
                 protagX_change = 10
                 if collision:
                     protagX_change = 0
-            if event.key == pygame.K_UP:
+            elif event.key == pygame.K_UP:
                 protagY_change = -10
                 if collision:
                     protagY_change = 0
-            if event.key == pygame.K_DOWN:
+            elif event.key == pygame.K_DOWN:
                 protagY_change = 10
                 if collision:
                     protagY_change = 0
-        if event.type == pygame.KEYUP:
+        elif event.type == pygame.KEYUP:
             if event.type == pygame.KEYDOWN or event.key == pygame.K_RIGHT or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                 protagX_change = 0
                 protagY_change = 0
