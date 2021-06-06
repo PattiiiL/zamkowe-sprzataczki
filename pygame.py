@@ -28,7 +28,7 @@ def wyswietl_wylosowane_puzzle:
 
 def dodaj_jeden:
     if len(wylosowane_puzzle)<6:
-        wylosowane_puzzle.aapend(random.choice(puzzle))
+        wylosowane_puzzle.append(random.choice(puzzle))
 
 '''___________________________________________________________________________
 okono gry'''
