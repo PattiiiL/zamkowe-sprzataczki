@@ -209,10 +209,40 @@ class tworzenie_puzzli:
                zmienna_y += 1
 
         return puzzle
+'''___________________________________________________________________________
+realizowanie reguły can't touch the floor:'''
+
+#zakrywanie puzzli za pomoca czerwonych kwadratów
+
+class Czerwony_kwadrat:
+
+    def __init__(self):
+        a = 50 
+        b = 50
+        # a i b to odpowiedznio szerokość i wysokość, które są stałe dla każdego kwadratu
+
+    def tworzenie_kwadratu(self,x,y):
+        kwadrat = pygame.rect(x,y, self.a, self.b) 
+        pygame.draw.rect(screen,(255,50,50),kwadrat) # w nawiasie kolejno: msc wyświetlenia, kolor jako krotka, to co chcemy narysować
+        pygame.display.flip() #umożliwia wyświetlenie kwadratu na planszy
+
+#tworzenie obiektow klasy Czerwony_kwadrat
+kwardat = Czerwony_kwadrat()
+
+#zasłanianie puzzli po kolei z użyciem modułu time = realizowanie reguły can't touch the floor
+
+i = 5 # i = liczba puzzli do zakrycia
+zmienna_x = 200
+zmienna_y = 100
+
+while i != 0:
+    kwardat.tworzenie_kwadratu(zmienna_x, zmienna_y) # używając metod klasy rysujemy kolejne kwadraty
+    time.sleep(10) #ustawiamy odstęp pomiędzy zasłanianiem kolejnych puzzli na 10 sek
+    i -= 1 
+    zmienna_y += 50 
 
 
-
-#wyswietlenie okienka z instrukcje gry
+#wyświetlenie okienka z instrukcją gry
 
 instrukcja = Button(okno_gry, text = "Instrukcja gry", command =  przycisk_instrukcja)
 instrukcja.pack(side=LEFT)
