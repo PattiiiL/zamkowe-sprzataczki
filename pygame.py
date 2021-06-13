@@ -16,8 +16,10 @@ import random
 Wszystkie funkcje'''
 
 def przycisk_instrukcja():
-    messagebox.showinfo("Instrukcja gry","Gra zamkowe sprzataczki dzieli sie na 3 etapy:\n W pierwszym etapie trzeba ułożyć puzzle w taki sposób aby tworzyły spójną ścieżkę. \n Następnie poruszając się za pomocą strzałek należy przejść postacią po ścieżce\n przez zamek do miejsca docelowego, zanim zapadnie się podłoga.")
+    messagebox.showinfo("Instrukcja gry",'Witamy w naszej grze!\n\nTwoim celem jest:\n  obrócenie ścieżki tak, by dało się po niej przejść; \n  posprzątanie jej; \n  ucieczka przed lawą. \n\nZaznaczanie puzzli: kliknięcie myszką\n    UWAGA! Po kliknięciu kolejnego puzzla NIE MOŻESZ\n    wrócić do obracania poprzedniego!\nObrót puzzli: klawisze WSAD\nSprzątanie: kliknięcie myszką\n    UWAGA! Jeśli nie sprzątniesz, nie ruszysz się dalej\n    postacią!\nSterowanie postacią: strzałki\n\nW górnym polu ekranu zobaczysz Twój pasek zdrowia.\nPośpiesz się! Zmniejsza się szybciej niż byś chciał!')
 
+def przycisk_authors():
+    messagebox.showinfo('Autorki', text = 'Freaking awesome code authors:\nNatalia Szantar\nKornelia Winiarska\nMartna Świątek\nPatrycja Lelujko\n\n\nFreaking awesome concept authors:\nNatalia Szantar\nKornelia Winiarska\nMartna Świątek\nPatrycja Lelujko\n\n\nFreaking awesome graphic character designer:\nKornelia Winiarska\n\n\nNot really freaking awesome music themes performer:\nMartna Świątek')
 
 '''___________________________________________________________________________
 okono gry'''
@@ -132,12 +134,16 @@ def keypress(event):
     if event.char == 'd':
         print('keypress()')
         puzzle.przesun_w_prawo()
+        move_value += 1
     elif event.char == 'a':
         puzzle.przesun_w_lewo()
+        move_value += 1
     elif event.char=='w':
         puzzle.przesun_w_gore()
+        move_value += 1
     elif event.char=='s':
         puzzle.przesun_w_dol()
+        move_value += 1
     else:
         pass
 
@@ -232,6 +238,8 @@ tworzenie klasy puzzle'''
 
 instrukcja = Button(okno_gry, text = "Instrukcja gry", command =  przycisk_instrukcja)
 instrukcja.pack(side=LEFT)
+autorki = Button(okno_gry, text = 'Autorki', command = przycisk_authors)
+autorki.pack()
 
 
 okno_gry.mainloop()

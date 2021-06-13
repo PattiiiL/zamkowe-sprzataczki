@@ -49,8 +49,17 @@ def protag(x,y):
     screen.blit(protag_Img,(x,y))
 
 def show_score(x,y):
-    score = font.render("You've cleaned the room!", True, (0,0,0))
+    score = font.render("You've cleaned the room!\nYour score is:", score_value, True, (0,0,0))
     screen.blit(score, (x,y))
+ 
+#health bar
+current_health = 400
+max_health = 400
+health_bar_length = 400
+health_ratio = max_health/health_bar_length
+amount = 0.01
+if current_health <= 0:
+    current_health = 0
 
 def collisionTrue(protagX,protagY,roomX,roomY):
     distance = math.sqrt((math.pow(roomX-protagX,2)) + (math.pow(roomY-protagY,2)))
@@ -120,28 +129,40 @@ while running:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
                 protagX_change = -10
+                move_value += 1
                 if collision:
                     protagX_change = 0
+                    move_value += 1
                 if len(trash_group1) > 0 or len(trash_group2) > 0:
                     protagX_change = 0
+                    move_value += 1
             if event.key == pygame.K_RIGHT:
                 protagX_change = 10
+                move_value += 1
                 if collision:
                     protagX_change = 0
+                    move_value += 1
                 if len(trash_group1) > 0 or len(trash_group2) > 0:
                     protagX_change = 0
+                    move_value += 1
             if event.key == pygame.K_UP:
                 protagY_change = -10
+                move_value += 1
                 if collision:
                     protagY_change = 0
+                    move_value += 1
                 if len(trash_group1) > 0 or len(trash_group2) > 0:
                     protagY_change = 0
+                    move_value += 1
             if event.key == pygame.K_DOWN:
                 protagY_change = 10
+                move_value += 1
                 if collision:
                     protagY_change = 0
+                    move_value += 1
                 if len(trash_group1) > 0 or len(trash_group2) > 0:
                     protagY_change = 0
+                    move_value += 1
         if event.type == pygame.KEYUP:
             if event.type == pygame.KEYDOWN or event.key == pygame.K_RIGHT or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
                 protagX_change = 0
@@ -150,6 +171,7 @@ while running:
         #Sprzątanie za pomocą kliknięcia myszki
         if event.type == pygame.MOUSEBUTTONDOWN:
             broom.cleaning()
+            move_value += 1
 
         protagX += protagX_change
         protagY += protagY_change
@@ -170,7 +192,17 @@ while running:
     if collision:
         show_score(scoreX,scoreY)
         show_game_over(game_overX,game_overY)
+
+    if current_health<=0:
+        current_health = 0
+        show_game_over(game_overX, game_overY)
+    if score_value<=0:
+        score_value = 0
+        show_game_over(game_overX, game_overY)
+        
+
         amount = 0
+
     
     current_time = pygame.time.get_ticks()
     
@@ -179,6 +211,11 @@ while running:
         trash_group1.draw(screen)
     if current_time - click_press_time > 15000:
         trash_group2.draw(screen)
+        
+    #zmniejszanie się health bara
+    current_health -= amount
+    pygame.draw.rect(screen, (255,0,0),(10,10,current_health,25))
+    pygame.draw.rect(screen, (0,0,0),(10,10,health_bar_length,25),4)
     
     #Aktywacja gracza/protagonisty etc.
     broom_group.draw(screen)
