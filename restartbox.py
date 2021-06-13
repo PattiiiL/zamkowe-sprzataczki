@@ -30,4 +30,4 @@ want_restart_no.pack(side=RIGHT)
 checking = Button(restart_game, text = 'OK', command = restarting_game)
 checking.pack(side=BOTTOM)
 
-
+#change/marge
