@@ -1,0 +1,96 @@
+#przed pętlą w przedbiegach definiowania
+#counter nie działa jeśli przed zdefiniowaną czcionką nie ma initialize
+#czyli jeśli nie wygląda to tak:
+
+pygame.font.init()
+font = pygame.font.Font('freesansbold.ttf', 25)
+
+#dobra przejdźmy do sedna - counter początek
+move_value = 0
+
+mvX = 350 #położenie countera - X (DO ZMIANY)
+mvY = 300 #położenie countera - Y (DO ZMIANY)
+
+#fajna funkcyjka do odpalania zamiast przeklejania display update
+#może ją doklejmy na początek
+def draw_window():
+    pygame.display.update()
+
+#funkcja countera
+def how_much_moves(x, y): 
+    move_counter = font.render("Moves:" + " " + str(move_value), True, (225, 225, 225))
+    screen.blit(move_counter, (x, y))
+
+#to jest wywoływacz, którego użyłam do swojego testu czy działa
+#nie mam pojęcia jaką my mamy mainloop, bo nie ogarniam gita
+#potraktujcie to jako przeklejony mainloop
+
+def main():
+    clock = pygame.time.Clock()
+    run = True
+    while run:
+        clock.tick(FPS)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+        how_much_moves(mvX, mvY) #to ten counter
+        draw_window() #fajna funkcyjka z wyżej
+    pygame.quit()
+
+funkcja_main = main()
+
+#przeklejone z głównego kodu, bo oddzielnie nie ma sensu
+
+running = True
+while running:
+    screen.blit(background_Img,(0,0))
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                protagX_change = -10
+                if collision:
+                    protagX_change = 0
+            if event.key == pygame.K_RIGHT:
+                protagX_change = 10
+                if collision:
+                    protagX_change = 0
+            if event.key == pygame.K_UP:
+                protagY_change = -10
+                if collision:
+                    protagY_change = 0
+            if event.key == pygame.K_DOWN:
+                protagY_change = 10
+                if collision:
+                    protagY_change = 0
+        if event.type == pygame.KEYUP:
+            if event.type == pygame.KEYDOWN or event.key == pygame.K_RIGHT or event.key == pygame.K_UP or event.key == pygame.K_DOWN:
+                protagX_change = 0
+                protagY_change = 0
+
+        protagX += protagX_change
+        protagY += protagY_change
+
+        if protagX <= 0:
+            protagX = 0
+        elif protagX >= 365:
+            protagX = 365
+
+        if protagY <= 0:
+            protagY = 0
+        elif protagY >= 355:
+            protagY = 355
+        #moja grafomania kodowa w runningu  
+        if event.type == pygame.KEYDOWN:
+          move_value += 1
+        if event.type == pygame.KEYUP:
+          move_value += 1  #albo 0? trochę nie rozumiem, co robi keyup xDD
+
+
+    collision = collisionTrue(protagX,protagY,roomX,roomY)
+    if collision:
+        show_score(scoreX,scoreY)
+        show_game_over(game_overX,game_overY)
+        
+        
