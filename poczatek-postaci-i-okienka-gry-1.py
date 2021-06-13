@@ -104,7 +104,8 @@ class Broom(pygame.sprite.Sprite):
 
     def cleaning(self):
         self.clean.play()
-        pygame.sprite.spritecollide(broom,trash_group, True)
+        pygame.sprite.spritecollide(broom,trash_group1, True)
+        pygame.sprite.spritecollide(broom,trash_group2, True)
 
     def update(self):
         self.rect.center = pygame.mouse.get_pos()
