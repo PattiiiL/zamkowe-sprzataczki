@@ -31,3 +31,5 @@ if score_value<=0:
         show_game_over(game_overX, game_overY)
         time.sleep(1)
         lose_theme.play()
+
+#change/marge
