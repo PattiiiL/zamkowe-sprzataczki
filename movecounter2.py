@@ -13,3 +13,5 @@ def how_much_moves(x, y):
 #w głównej pętli  
     how_much_moves(mvX, mvY)
 #update'y move countera w poszczególnych patchach do funkcji/pętli
+
+#marge

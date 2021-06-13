@@ -243,3 +243,5 @@ autorki.pack()
 
 
 okno_gry.mainloop()
+
+#changes/marge
