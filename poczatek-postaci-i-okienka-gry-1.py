@@ -192,7 +192,9 @@ while running:
     if collision:
         show_score(scoreX,scoreY)
         show_game_over(game_overX,game_overY)
+        amount = 0
 
+    
     if current_health<=0:
         current_health = 0
         show_game_over(game_overX, game_overY)
@@ -200,8 +202,6 @@ while running:
         score_value = 0
         show_game_over(game_overX, game_overY)
         
-
-        amount = 0
 
     
     current_time = pygame.time.get_ticks()
